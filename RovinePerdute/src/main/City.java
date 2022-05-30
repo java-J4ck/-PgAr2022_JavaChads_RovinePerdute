@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class City {
 
+	/*
 	private String name;
 	private int id;
 	private int[] coords = new int[3];
@@ -18,28 +19,7 @@ public class City {
 		this.coords = coords;
 		this.linkTo = linkTo;
 	}
-
-
-	public String getName() {
-		return name;
-	}
-
-
-	public int getId() {
-		return id;
-	}
-
-
-	public int[] getCoords() {
-		return coords;
-	}
-
-
-	public ArrayList<Integer> getLinkTo() {
-		return linkTo;
-	}
-	
-	
+	*/
 	
 	
 	
