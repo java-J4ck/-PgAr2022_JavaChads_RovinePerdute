@@ -38,7 +38,7 @@ public class BuildTree {
 	
 	private static double getDistance_Tonatiuh(City fromCity,City toCity) {
 		double distance=0;
-		distance=Math.sqrt(Math.pow(fromCity.getcoords()[X_COORD_INDEX]-toCity.getcoords()[X_COORD_INDEX], ALTITUDE_INDEX)+ Math.pow(fromCity.getcoords()[Y_COORD_INDEX]-toCity.getcoords()[Y_COORD_INDEX], ALTITUDE_INDEX));
+		distance=Math.sqrt(Math.pow(fromCity.getcoords()[X_COORD_INDEX]-toCity.getcoords()[X_COORD_INDEX], 2)+ Math.pow(fromCity.getcoords()[Y_COORD_INDEX]-toCity.getcoords()[Y_COORD_INDEX], 2));
 		return distance;
 	}
 	
