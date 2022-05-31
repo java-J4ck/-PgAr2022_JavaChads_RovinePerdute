@@ -19,29 +19,29 @@ public class City{
 		this.coords = coords;
 		this.linkTo = linkTo;
 	}
-	
-	
-	 public String getName() {
-			return this.name;
-		}
-	 
-	 public int getid() {
-			return this.id;
-		}
-	 
-	 
-	 
-	 public int[] getcoords() {
-		 return this.coords;
-		 
-	  }
 
 
-	public ArrayList<Integer> getlinkTo() {
-		
-		return linkTo;
+	public String getName() {
+		return name;
 	}
 
+
+	public int getId() {
+		return id;
+	}
+
+
+	public int[] getCoords() {
+		return coords;
+	}
+
+
+	public ArrayList<Integer> getLinkTo() {
+		return linkTo;
+	}
+	
+	
+	
 
 		 
 	 
