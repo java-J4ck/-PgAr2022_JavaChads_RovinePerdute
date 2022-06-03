@@ -4,10 +4,13 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
-
-
 import main.City;
 
+
+/**
+ * Classe che implementa l'algoritmo di pathfinding
+ *
+ */
 
 public class PathFinder {
 	
@@ -153,7 +156,6 @@ public class PathFinder {
 	private static double heuristic(int id, double dist) {
 		
 		double w;		
-		//w = dist - (id * ((dist*5)/100));   // CAMBIANDO LA PERCENTUALE DAL 10% AL 5%, A* RESTITUISCE LA STESSA STRADA DI DIJKSTRA
 		w = dist - (dist%(id));		
 		return w;
 		
