@@ -62,7 +62,7 @@ public class PathFinder {
 			// Considera tutti i nodi collegati a currentNode. Per ogni nodo calcola la distanza dal campo base al nodo stesso e, se questa distanza e' minore
 			// di quella segnata nell'etichetta (sempre dello stesso nodo), aggiorna il valore alla distanza appena calcolata.
 			for(City neighbour : currentNode.getToCity().keySet()) {
-	//			calc_dist = labels.get(currentNode).totWeight + currentNode.getDistance(neighbour); // calc_dist = distanza dal campo base al currentNode (segnata in tabella) + distanza dal currentNode al nodo considerato
+				calc_dist = labels.get(currentNode).totWeight + currentNode.getDistance(neighbour); // calc_dist = distanza dal campo base al currentNode (segnata in tabella) + distanza dal currentNode al nodo considerato
 				if(calc_dist < labels.get(neighbour).totWeight) {  
 					labels.put(neighbour, new Label(calc_dist, currentNode));
 				}
