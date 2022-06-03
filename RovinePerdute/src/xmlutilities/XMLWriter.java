@@ -1,12 +1,14 @@
 package xmlutilities;
 
 import java.io.FileOutputStream;
-
+import java.util.ArrayList;
 import java.util.LinkedList;
+
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamWriter;
-import main.City;
 
+import main.City;
+import tree.BuildTree;
 import tree.PathFinder;
 
 
@@ -20,7 +22,8 @@ import tree.PathFinder;
 
 public class XMLWriter {
 
-	public static void XmlWrite(LinkedList<City>  treeT, LinkedList<City> treeM) {
+	public static void XmlWrite(ArrayList<City> allCity) {
+		
 		
 		
 		
@@ -29,7 +32,7 @@ public class XMLWriter {
     	XMLOutputFactory xmlof = null;
     	XMLStreamWriter xmlw = null;
     	try {
-	
+    		 LinkedList<City> treeT = BuildTree.buildTree(allCity, true);
 			 xmlof = XMLOutputFactory.newInstance();
 			 xmlw = xmlof.createXMLStreamWriter(new FileOutputStream("Routes.xml"), "utf-8");
 		//	 xmlw.writeStartDocument("utf-8", "1.0");
@@ -55,7 +58,9 @@ public class XMLWriter {
 					  
 				  }
 				  xmlw.writeEndElement();
-				
+				  
+				  
+				  LinkedList<City> treeM = BuildTree.buildTree(allCity, false);
 				  LinkedList<City> path_M = PathFinder.dijkstra(treeM);//informazioni secondo teams
 				  xmlw.writeStartElement("route");//apri output				  
 				  xmlw.writeAttribute("team","Metztli");//scrittura nome team
