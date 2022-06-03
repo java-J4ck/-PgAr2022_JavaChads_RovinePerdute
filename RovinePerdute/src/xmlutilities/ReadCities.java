@@ -85,7 +85,6 @@ public class ReadCities {
 				linkTo = new ArrayList<>();
 			}
 			
-			
 			last = r.readNext();
 		}
 		
