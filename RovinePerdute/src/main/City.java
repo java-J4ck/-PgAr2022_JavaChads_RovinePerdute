@@ -28,22 +28,30 @@ public class City extends Node{
 		this.linkTo = linkTo;
 	}
 
-
+	/**
+	 * @return Il nome della città
+	 */
 	public String getName() {
 		return name;
 	}
 
-
+	/**
+	 * @return id città
+	 */
 	public int getId() {
 		return id;
 	}
 
-
+	/**
+	 * @return Raccogli le cordinate delle città
+	 */
 	public int[] getCoords() {
 		return coords;
 	}
 
-
+	/**
+	 * @return Fornisce collegamenti tra città
+	 */
 	public ArrayList<Integer> getLinkTo() {
 		return linkTo;
 	}

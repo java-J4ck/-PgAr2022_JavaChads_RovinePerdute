@@ -8,6 +8,8 @@ import javax.xml.stream.XMLStreamWriter;
 import main.City;
 
 import tree.PathFinder;
+
+
 /**
  * 
  * Classe che gestisce la scrittura del file .xml 
@@ -37,7 +39,7 @@ public class XMLWriter {
 				//############################STAMPA PERSONE#############################################################
 				  xmlw.writeStartElement("routes"); // scrittura del tag radice <rouds>
 				  //scrittura della rotta del team Tonathiu
-				  LinkedList<City> path_T = PathFinder.dijkstra(treeT);informazioni primo teams
+				  LinkedList<City> path_T = PathFinder.dijkstra(treeT);//informazioni primo teams
 				  xmlw.writeStartElement("route");//apri output				  
 				  xmlw.writeAttribute("team","Tonathiu");//scrittura nome team
 				  xmlw.writeAttribute("cost",String.format("%.2f", PathFinder.getPathCost()));//scrittura costo
@@ -48,7 +50,7 @@ public class XMLWriter {
 					  
 					  xmlw.writeStartElement("City"); // start elemento nome
 					  xmlw.writeAttribute("id", String.format("%d", c.getId())); //scrittura id	
-					  xmlw.writeAttribute("nome",c.getName());/sctrittura città toccate
+					  xmlw.writeAttribute("nome",c.getName());//sctrittura città toccate
 					  xmlw.writeEndElement();////chiusura città toccate				
 					  
 				  }
