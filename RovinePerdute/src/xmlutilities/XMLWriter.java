@@ -8,7 +8,11 @@ import javax.xml.stream.XMLStreamWriter;
 import main.City;
 
 import tree.PathFinder;
-
+/**
+ * 
+ * Classe che gestisce la scrittura del file .xml 
+ *
+ */
 
 
 
@@ -31,38 +35,38 @@ public class XMLWriter {
 			 
 			 try { // blocco try per raccogliere eccezioni
 				//############################STAMPA PERSONE#############################################################
-				  xmlw.writeStartElement("routes"); // scrittura del tag radice <programmaArnaldo>
+				  xmlw.writeStartElement("routes"); // scrittura del tag radice <rouds>
 				  //scrittura della rotta del team Tonathiu
-				  LinkedList<City> path_T = PathFinder.dijkstra(treeT);
+				  LinkedList<City> path_T = PathFinder.dijkstra(treeT);informazioni primo teams
 				  xmlw.writeStartElement("route");//apri output				  
-				  xmlw.writeAttribute("team","Tonathiu");//apri persone
-				  xmlw.writeAttribute("cost",String.format("%.2f", PathFinder.getPathCost()));//apri persone
-				  xmlw.writeAttribute("cities",String.format("%d", path_T.size()));//apri persone
+				  xmlw.writeAttribute("team","Tonathiu");//scrittura nome team
+				  xmlw.writeAttribute("cost",String.format("%.2f", PathFinder.getPathCost()));//scrittura costo
+				  xmlw.writeAttribute("cities",String.format("%d", path_T.size()));//scrittura numero città toccate
 				  
 				  
 				  for (City  c: path_T ) {
 					  
 					  xmlw.writeStartElement("City"); // start elemento nome
 					  xmlw.writeAttribute("id", String.format("%d", c.getId())); //scrittura id	
-					  xmlw.writeAttribute("nome",c.getName());
-					  xmlw.writeEndElement();//chiusura persone  					
+					  xmlw.writeAttribute("nome",c.getName());/sctrittura città toccate
+					  xmlw.writeEndElement();////chiusura città toccate				
 					  
 				  }
 				  xmlw.writeEndElement();
 				
-				  LinkedList<City> path_M = PathFinder.dijkstra(treeM);
+				  LinkedList<City> path_M = PathFinder.dijkstra(treeM);//informazioni secondo teams
 				  xmlw.writeStartElement("route");//apri output				  
-				  xmlw.writeAttribute("team","Metztli");//apri persone
-				  xmlw.writeAttribute("cost",String.format("%.2f", PathFinder.getPathCost()));//apri persone
-				  xmlw.writeAttribute("cities",String.format("%d", path_M.size()));//apri persone
+				  xmlw.writeAttribute("team","Metztli");//scrittura nome team
+				  xmlw.writeAttribute("cost",String.format("%.2f", PathFinder.getPathCost()));//scrittura costo
+				  xmlw.writeAttribute("cities",String.format("%d", path_M.size()));//scrittura numero città toccate
 				  
 				  
 				  for (City  c: path_M ) {
 					  
 					  xmlw.writeStartElement("City"); // start elemento nome
 					  xmlw.writeAttribute("id", String.format("%d", c.getId() )); //scrittura id	
-					  xmlw.writeAttribute("nome",c.getName());
-					  xmlw.writeEndElement();//chiusura persone  					
+					  xmlw.writeAttribute("nome",c.getName());//sctrittura città toccate
+					  xmlw.writeEndElement();//chiusura città toccate					
 					  
 				  }
 				  xmlw.writeEndElement();//chiusura output
