@@ -6,33 +6,28 @@ import main.City;
 
 public class Node {
 	
-	private City currentCity;
-	
-	private HashMap<Node,Double> toCity = new HashMap<Node,Double>();
 
-	public Node(City currentCity) {
-		this.currentCity = currentCity;
+	
+	private HashMap<City,Double> toCity = new HashMap<City,Double>();
+
+	
+	public void addLink(City city, double distance) {
+		toCity.put(city, distance);
 	}
 	
-	public void addLink(Node node, double distance) {
-		toCity.put(node, distance);
-	}
-	
-	public double getDistance(Node destination) {
+	public double getDistance(City destination) {
 		double dist;
 		try {
 			dist = toCity.get(destination);
 		} catch (NullPointerException e) {
-			dist = Double.MAX_VALUE;
+			dist = Double.POSITIVE_INFINITY;
 		}
 		return dist;
 	}
 
-	public City getCurrentCity() {
-		return currentCity;
-	}
+	
 
-	public HashMap<Node, Double> getToCity() {
+	public HashMap<City, Double> getToCity() {
 		return toCity;
 	}
 	

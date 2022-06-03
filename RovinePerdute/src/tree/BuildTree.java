@@ -11,43 +11,28 @@ public class BuildTree {
 	private static final int ALTITUDE_INDEX = 2;
 	private static final int Y_COORD_INDEX = 1;
 	private static final int X_COORD_INDEX = 0;
+	
 
-	public static LinkedList<Node> buildTree(ArrayList<City> allCity, boolean isTonatiuh){
-		LinkedList<Node> tree = new LinkedList<Node>();
-		
-		//aggiungiamo tutti i nodi
-		for(City city : allCity) tree.add(new Node(city)); 
-		//aggiungiamo i link
-		Node node;
-		City currentCity;
-		ListIterator<Node> iter = tree.listIterator();
-		while(iter.hasNext()) {
-			node = iter.next();
-			currentCity = node.getCurrentCity();
-			for(int id : currentCity.getLinkTo()) {
-				for(City city : allCity) {
-					if(city.getId() == id && isTonatiuh) {
-						for(Node n : tree) {
-							if(city.equals(n.getCurrentCity())) {
-								node.addLink(n, getDistance_Tonatiuh(currentCity,city));						
-								break;
-							}
-						}
+	public static LinkedList<City>  buildTree(ArrayList<City> allCity, boolean isTonatiuh){
+		 LinkedList<City> tree = new LinkedList<City>();
+		for(City city : allCity) tree.add(city);
+		for(City city : tree) {
+			for(int id : city.getLinkTo()) {
+				for(City toCity : tree) {
+					if(id == toCity.getId() && isTonatiuh) {
+						city.addLink(toCity, getDistance_Tonatiuh(city, toCity));
+						break;
 					}
-					else if(city.getId() == id && !isTonatiuh) {
-						for(Node n : tree) {
-							if(city.equals(n.getCurrentCity())) {
-								node.addLink(n, getDistance_Metztli(currentCity,city));
-								break;
-							}
-						}
+					else if	(id == toCity.getId() && !isTonatiuh) {
+						city.addLink(toCity, getDistance_Metztli(city, toCity));
+						break;
 					}
+					
 				}
 			}
 		}
 		return tree;
 	}
-	
 	
 	private static double getDistance_Tonatiuh(City fromCity, City toCity) {
 		double distance=0;

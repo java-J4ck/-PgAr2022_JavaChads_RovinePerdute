@@ -3,8 +3,10 @@ package main;
 
 import java.util.ArrayList;
 
+import tree.Node;
 
-public class City{
+
+public class City extends Node{
 
 	
 	private String name;
@@ -14,6 +16,7 @@ public class City{
 	
 	
 	public City(String name, int id, int[] coords, ArrayList<Integer> linkTo) {
+		super();
 		this.name = name;
 		this.id = id;
 		this.coords = coords;
