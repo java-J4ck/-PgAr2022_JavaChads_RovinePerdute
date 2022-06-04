@@ -7,12 +7,11 @@ import xmlutilities.XMLWriter;
 
 
 public class Main {
-<<<<<<< HEAD
+
 
 	private static final String[] voci= {"5","12","50","200","2000","10000"};
 
-=======
->>>>>>> 76ee211342487b84dbfb7cecd8a1469ee3eeb535
+
 	
 	public static void main(String[] args) {
 		//menu di scelta della mappa
