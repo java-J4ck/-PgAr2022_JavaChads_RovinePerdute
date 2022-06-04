@@ -4,18 +4,24 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-
 import main.City;
 
 
+/**
+ * Classe che implementa l'algoritmo di pathfinding
+ *
+ */
+
 public class PathFinder {
 	
-	private static double pathCost;
 	
+	private static double pathCost;   // Variabile che contine il costo del percorso piu' economico per raggiungere le rovine perdute
+
 	
-	private static class Label {    // Static nested class che rappresenta l'etichetta assegnata a ogni nodo per l'esecuzione dell'algoritmo
+	/**
+	 * Static nested class che rappresenta l'etichetta assegnata a ogni nodo per l'esecuzione dell'algoritmo
+	 */
+	private static class Label {    
 		
 		double totWeight;   // Peso (distanza) del cammino piu' corto che collega il nodo associato all'etichetta e il nodo di partenza
 		City previousNode;  // Nodo precedente al nodo associato all'etichetta
@@ -30,34 +36,29 @@ public class PathFinder {
 	
 	
 	/**
-	 * Dati due nodi un un grafo, il cammino ottimo che unisce tali nodi (se esiste) e'
-	 * composto dall'unione di sotto-cammini ottimi.
+	 * Algoritmo che, dato un grafo in cui ogni nodo rappresenta una citta', trova il cammino meno costoso per raggiungere
+	 * le Rovine Perdute partendo dal campo base.
 	 * 
 	 * @param graph
-	 * @return
+	 * @return La path meno costosa per raggiungere le Rovine Perdute partendo dal campo base
 	 */
 	
 	public static LinkedList<City> dijkstra(LinkedList<City> graph){
 		
-		LinkedList<City> path = new LinkedList<>();
-		LinkedList<City> nodes = (LinkedList<City>) graph.clone();
-		HashMap<City, Label> labels = new HashMap<>();
+		LinkedList<City> path = new LinkedList<>();  // LinkedList di citta' per raggiungere le rovine perdute (percorso meno costoso)  
+		LinkedList<City> nodes = (LinkedList<City>) graph.clone();  // Copia del grafo di citta'
+		HashMap<City, Label> labels = new HashMap<>();  // HashMap contenente le etichette per ogni nodo
 		double calc_dist = 0;
 		
 		for(City n : nodes) {   // Inizialmente non siamo a conoscenza di nessuna path (se non, banalmente, quella che dal primo nodo conduce al primo nodo)
 			labels.put(n, new Label(Double.POSITIVE_INFINITY, null));   // Crea una nuova etichetta per tutti i nodi e settala a distanza (dall'orgine) infinita e nodo precedente nullo
 		}
 		
-		//path.add(nodes.getFirst());
 		labels.put(nodes.peek(), new Label(0, null));  // Setta per il primo nodo (campo base) la distanza 0 (da se stesso) e nodo precedente nullo
-		//nodes.remove();
 		
 		City currentNode = nodes.peek();  // Imposta currentNode al primo nodo della LinkedList (campo base)
 		
 		while(!nodes.isEmpty()) {
-			
-			//path.add(currentNode);
-			
 			
 			// Considera tutti i nodi collegati a currentNode. Per ogni nodo calcola la distanza dal campo base al nodo stesso e, se questa distanza e' minore
 			// di quella segnata nell'etichetta (sempre dello stesso nodo), aggiorna il valore alla distanza appena calcolata.
@@ -78,19 +79,10 @@ public class PathFinder {
 			}
 			
 			if(currentNode.getName().contains("Rovine Perdute")) {  // Se currentNode e' le Rovine Perdute, allora e' stato trovato il percorso piu' breve
-				//path.add(currentNode);
 				break;
 			}
 			
 		}
-	
-		/*
-		for(Node n : labels.keySet()) {
-			System.out.println(n.getCurrentCity().getName() + ":");
-			System.out.println(labels.get(n).totWeight);
-		}
-		*/
-		
 		
 		savePathCost(labels.get(currentNode).totWeight);   // Salva in una variable il costo del percorso piu' breve trovato
 		
@@ -99,21 +91,24 @@ public class PathFinder {
 			currentNode = labels.get(currentNode).previousNode;
 		}
 		
-		
-		
-		
 		return path;
 		
 	}
 	
 	
 	
+	
+	/**
+	 * Tentativo brutto (e non funzionante) di implementare l'A*
+	 * @param graph
+	 * @return
+	 */
+	
 	public static LinkedList<City> astar(LinkedList<City> graph){
 		
 		LinkedList<City> path = new LinkedList<>();
 		HashMap<City, Label> labels = new HashMap<>();
-		LinkedList<City> nodes = (LinkedList<City>) graph.clone();
-		PriorityQueue<City> openSet = new PriorityQueue<City>(new Comparator<City>() {
+		PriorityQueue<City> openSet = new PriorityQueue<City>(new Comparator<City>() {   // PriorityQueue con comparator per le citta' 
 		    public int compare(City n1, City n2) {
 		        if(labels.get(n1).totWeight > labels.get(n2).totWeight) return 1;
 		        else if(labels.get(n1).totWeight < labels.get(n2).totWeight) return -1;
@@ -122,11 +117,10 @@ public class PathFinder {
 		});
 		double calc_dist = 0;
 		
+		openSet.add(graph.peek());
+		labels.put(graph.poll(), new Label(0, null));
 		
-		openSet.add(nodes.peek());
-		labels.put(nodes.poll(), new Label(0, null));
-		
-		for(City n : nodes) {   // Inizialmente non siamo a conoscenza di nessuna path (se non, banalmente, quella che dal primo nodo conduce al primo nodo)
+		for(City n : graph) {   // Inizialmente non siamo a conoscenza di nessuna path (se non, banalmente, quella che dal primo nodo conduce al primo nodo)
 			labels.put(n, new Label(Double.POSITIVE_INFINITY, null));   // Crea una nuova etichetta per tutti i nodi e settala a distanza (dall'orgine) infinita e nodo precedente nullo
 		}
 		
@@ -143,7 +137,6 @@ public class PathFinder {
 				return path;
 			}
 			
-			
 			for(City neighbor : currentNode.getToCity().keySet()) {
 				calc_dist = heuristic(neighbor.getId(), currentNode.getDistance(neighbor));
 				calc_dist += labels.get(currentNode).totWeight;
@@ -154,7 +147,6 @@ public class PathFinder {
 			}
 			
 		}
-	
 		
 		return path;
 		
@@ -164,7 +156,6 @@ public class PathFinder {
 	private static double heuristic(int id, double dist) {
 		
 		double w;		
-		//w = dist - (id * ((dist*5)/100));   // CAMBIANDO LA PERCENTUALE DAL 10% AL 5%, A* RESTITUISCE LA STESSA STRADA DI DIJKSTRA
 		w = dist - (dist%(id));		
 		return w;
 		

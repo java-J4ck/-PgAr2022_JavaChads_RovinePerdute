@@ -22,7 +22,7 @@ public class BuildTree {
 	 * @return albero
 	 */
 	public static LinkedList<City>  buildTree(ArrayList<City> allCity, boolean isTonatiuh){
-		 LinkedList<City> tree = new LinkedList<City>();//costeuisce un albero vuoto
+		LinkedList<City> tree = new LinkedList<City>();//costruisce un albero vuoto
 		for(City city : allCity) tree.add(city);//aggiunge tutte le citta
 		//per ogni nodo aggiunge i collegamenti ad altre
 		for(City city : tree) {
@@ -42,6 +42,8 @@ public class BuildTree {
 		}
 		return tree;
 	}
+	
+	
 	/**
 	 * metodo per generare la distanza tra due citta per il  team Tonatiuh
 	 * usando la distanza euclidea
@@ -55,6 +57,8 @@ public class BuildTree {
 		distance=Math.sqrt(Math.pow(fromCity.getCoords()[X_COORD_INDEX]-toCity.getCoords()[X_COORD_INDEX], 2)+ Math.pow(fromCity.getCoords()[Y_COORD_INDEX]-toCity.getCoords()[Y_COORD_INDEX], 2));
 		return distance;
 	}
+	
+	
 	/**
 	 * metodo per generare la distanza tra due citta per il  team Metztli
 	 * usando il modulo della differenza tra l'altitudine
